@@ -3,7 +3,7 @@ package datastore
 import "errors"
 
 // Errors
-const (
+var (
 	ErrNotFound = errors.New("Not found")
 )
 
