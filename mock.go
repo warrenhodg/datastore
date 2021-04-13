@@ -18,18 +18,20 @@ func NewMock() *Mock {
 	}
 }
 
-func (m *Mock) Get(key string) (value interface{}, err error) {
+// Get retrieves the value stored with the specified key
+func (m *Mock) Get(key interface{}) (value interface{}, err error) {
 	if m.GetError != nil {
 		return nil, m.GetError
 	}
 	value, ok := m.Values.Load(key)
 	if !ok {
-		return nil, nil
+		return nil, ErrNotFound
 	}
 	return value, nil
 }
 
-func (m *Mock) Set(key string, value interface{}) error {
+// Set sets the specified key to the specified value
+func (m *Mock) Set(key interface{}, value interface{}) error {
 	if m.SetError != nil {
 		return m.SetError
 	}
